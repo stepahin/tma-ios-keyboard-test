@@ -4,6 +4,7 @@ import mkcert from 'vite-plugin-mkcert'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/tma-ios-keyboard-test/',
   plugins: [react(), mkcert()],
   resolve: {
     alias: {
