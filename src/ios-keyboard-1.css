@@ -1,0 +1,346 @@
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  height: 100vh; /* Используем визуальную высоту */
+  overflow: hidden;
+  margin: 0;
+  position: fixed; /* Фиксируем позицию, чтобы предотвратить сдвиг */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  background-color: #000000;
+  color: #ffffff;
+  max-width: 100vw; /* Ограничиваем максимальную ширину до viewport */
+  box-sizing: border-box; /* Чтобы padding не расширял элементы */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Шрифты без засечек */
+}
+
+* {
+  box-sizing: border-box; /* Применяем box-sizing ко всем элементам */
+  -webkit-tap-highlight-color: transparent; /* Убираем подсветку при нажатии на iOS */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Шрифты без засечек для всех элементов */
+}
+
+/* Стили для Telegram WebApp */
+:root {
+  --tg-theme-bg-color: #000000;
+  --tg-theme-text-color: #ffffff;
+  --tg-theme-hint-color: #999999;
+  --tg-theme-button-color: #2ea6ff;
+  --tg-theme-button-text-color: #ffffff;
+  
+  /* Если не получаем безопасные области от Telegram, используем значения по умолчанию */
+  --tg-safe-area-inset-top: 0px;
+  --tg-safe-area-inset-right: 0px;
+  --tg-safe-area-inset-bottom: 0px;
+  --tg-safe-area-inset-left: 0px;
+}
+
+/* Стили для компонентов приложения */
+.app-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed; /* Фиксируем позицию контейнера */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  max-width: 100vw; /* Ограничиваем максимальную ширину до viewport */
+  margin: 0 auto; /* Центрируем контейнер */
+  transform: translateZ(0); /* Ускорение рендеринга */
+  -webkit-transform: translateZ(0);
+}
+
+.tool-title {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 16px;
+  padding-top: calc(12px + var(--tg-safe-area-inset-top)); /* Уменьшаем верхний отступ на 4px */
+  position: fixed;
+  top: -3px; /* Приподнимаем на 4px вверх */
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100vw;
+  background-color: rgba(50, 50, 50, 0.3); /* Полупрозрачный серый фон */
+  backdrop-filter: blur(5px); /* Добавляем эффект размытия */
+  -webkit-backdrop-filter: blur(5px); /* Для Safari */
+  z-index: 10;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Добавляем легкую тень */
+}
+
+.content-area {
+  flex: 1;
+  overflow: hidden;
+  padding-top: calc(56px + var(--tg-safe-area-inset-top));
+  padding-bottom: calc(200px + var(--tg-safe-area-inset-bottom));
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.horizontal-carousel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  max-height: calc(100% - 8px);
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Стили для Embla карусели */
+.embla {
+  overflow: hidden;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  max-width: 100vw; /* На всю ширину экрана */
+}
+
+.embla__container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;
+  max-width: 100vw; /* Ограничиваем ширину контейнера */
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  max-width: 100vw; /* Ограничиваем ширину слайда */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  overflow: hidden; /* Предотвращаем переполнение */
+}
+
+/* Новый стиль для обертки слайдов */
+.embla__slide__wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.embla__slide__img {
+  max-width: 100%;
+  max-height: calc(100% - 8px);
+  width: auto; /* Меняем на auto, чтобы сохранять пропорции */
+  height: auto;
+  object-fit: contain; /* Сохраняем пропорции изображений */
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.vertical-feed {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 0 16px;
+  padding-bottom: 0;
+  padding-top: 0;
+  position: absolute;
+  top: 0; /* Начинается с самого верха экрана */
+  bottom: calc(var(--tg-safe-area-inset-bottom) + 200px); /* PromptForm высота по умолчанию 200px */
+  left: 0;
+  right: 0;
+}
+
+/* Добавляем отступ для первой картинки в ленте, чтобы она не была полностью скрыта заголовком */
+.vertical-feed .feed-image:first-child {
+  margin-top: calc(56px + var(--tg-safe-area-inset-top) + 16px); /* Добавляем 16px отступ, как и сбоку */
+}
+
+.feed-image {
+  width: 100%;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.prompt-form {
+  padding: 16px;
+  padding-top: 8px;
+  padding-bottom: calc(16px + var(--tg-safe-area-inset-bottom));
+  background-color: #1a1a1a;
+  border-top: 1px solid #333333;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: height 0.3s ease;
+  z-index: 10; /* Увеличиваем z-index */
+  transform: translate3d(0,0,0); /* Хак для iOS */
+  -webkit-transform: translate3d(0,0,0);
+}
+
+.prompt-textarea:focus {
+  outline: 2px solid var(--tg-theme-button-color, #2ea6ff);
+}
+
+.prompt-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tab-button {
+  padding: 8px 16px;
+  background-color: #555555;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  font-size: 14px; /* Выставляем явный размер шрифта */
+}
+
+.tab-button.active {
+  background-color: var(--tg-theme-button-color, #2ea6ff);
+}
+
+.prompt-textarea {
+  width: 100%;
+  min-height: 48px; /* Минимальная высота для 2 строк */
+  background-color: #444444;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  color: white;
+  resize: none;
+  margin-bottom: 12px;
+  font-family: inherit; /* Используем тот же шрифт, что и в остальном приложении */
+  font-size: 14px; /* Такой же размер шрифта, как на кнопках */
+  caret-color: #ff69b4; /* Розовый цвет курсора */
+  line-height: 1.5; /* Увеличиваем межстрочный интервал */
+  overflow-y: auto; /* Добавляем вертикальный скролл при необходимости */
+  
+  /* iOS хаки */
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  z-index: 5;
+  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+  will-change: transform; /* Ещё один хак для iOS */
+}
+
+.prompt-textarea:focus {
+  outline: 2px solid var(--tg-theme-button-color, #2ea6ff);
+}
+
+/* Стиль для выделения текста */
+.prompt-textarea::selection {
+  background-color: rgba(255, 105, 180, 0.5); /* Полупрозрачный розовый для выделения */
+  color: white; /* Цвет текста при выделении */
+}
+
+/* Стили для контейнера слайдера */
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 0 4px;
+  height: 28px;
+}
+
+.slider-label {
+  color: #ffffff;
+  font-size: 14px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin-right: 4px;
+}
+
+.slider, .html-slider {
+  flex-grow: 1;
+  margin: 0 8px;
+  height: 20px; /* Увеличиваем высоту */
+}
+
+/* Стили для HTML слайдера */
+.html-slider {
+  -webkit-appearance: none;
+  appearance: none; /* Добавляем стандартное свойство */
+  width: 100%;
+  height: 8px;
+  background: #555555;
+  border-radius: 4px;
+  outline: none;
+}
+
+.html-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #2ea6ff;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.html-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #2ea6ff;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+/* Стили для переопределения стилей слайдера */
+[role="slider"] {
+  background-color: #2ea6ff !important;
+  border-color: #ffffff !important;
+  width: 24px !important;
+  height: 24px !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.relative.h-2 {
+  height: 6px !important;
+}
+
+.absolute.h-full {
+  background-color: #2ea6ff !important;
+}
+
+.bg-gray-600 {
+  background-color: #555555 !important;
+}
+
+

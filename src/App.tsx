@@ -1,0 +1,84 @@
+import { useEffect } from 'react'
+import './App.css'
+import { useTelegram } from './lib/telegram'
+import { useNavigate } from 'react-router-dom'
+
+function App() {
+  const { onReady, backButton, disableVerticalSwipe } = useTelegram()
+  const navigate = useNavigate()
+
+  // Инициализация после загрузки компонента
+  useEffect(() => {
+    // Сообщаем Telegram WebApp, что приложение готово
+    onReady()
+    
+    // Скрываем кнопку назад на главном экране
+    backButton.hide()
+    
+    // Отключаем вертикальный свайп для закрытия приложения
+    disableVerticalSwipe()
+  }, [onReady, backButton, disableVerticalSwipe])
+
+  // Обработчик перехода на выбранный вариант
+  const handleNavigate = (path: string) => {
+    navigate(path)
+  }
+
+  return (
+    <div className="main-container">
+      <div className="main-title">iOS Keyboard Test Variants</div>
+      
+      <div className="variants-list">
+        <button 
+          className="variant-button" 
+          onClick={() => handleNavigate('/ios-keyboard-1')}
+        >
+          iOS Keyboard 1
+          <span className="variant-description">Android ok<br/>iOS broken<br/>No webkit tricks</span>
+        </button>
+        
+        <button 
+          className="variant-button" 
+          onClick={() => handleNavigate('/ios-keyboard-2')}
+        >
+          iOS Keyboard 2
+          <span className="variant-description">Caret ok<br/>No phantom clickable area<br/>Correct position</span>
+        </button>
+        
+        <button 
+          className="variant-button" 
+          onClick={() => handleNavigate('/ios-keyboard-3')}
+        >
+          iOS Keyboard 3
+          <span className="variant-description">Smooth transition (haha no)</span>
+        </button>
+        
+        <button 
+          className="variant-button" 
+          onClick={() => handleNavigate('/ios-keyboard-4')}
+        >
+          iOS Keyboard 4
+          <span className="variant-description">Opening transition</span>
+        </button>
+        
+        <button 
+          className="variant-button" 
+          onClick={() => handleNavigate('/ios-keyboard-5a')}
+        >
+          iOS Keyboard 5a
+          <span className="variant-description">Different approach</span>
+        </button>
+        
+        <button 
+          className="variant-button" 
+          onClick={() => handleNavigate('/ios-keyboard-5b')}
+        >
+          iOS Keyboard 5b
+          <span className="variant-description">Another attempt</span>
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default App

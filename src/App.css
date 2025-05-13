@@ -1,0 +1,97 @@
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  height: 100vh; /* u0418u0441u043fu043eu043bu044cu0437u0443u0435u043c u0432u0438u0437u0443u0430u043bu044cu043du0443u044e u0432u044bu0441u043eu0442u0443 */
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  color: #ffffff;
+  max-width: 100vw; /* u041eu0433u0440u0430u043du0438u0447u0438u0432u0430u0435u043c u043cu0430u043au0441u0438u043cu0430u043bu044cu043du0443u044e u0448u0438u0440u0438u043du0443 u0434u043e viewport */
+  box-sizing: border-box; /* u0427u0442u043eu0431u044b padding u043du0435 u0440u0430u0441u0448u0438u0440u044fu043b u044du043bu0435u043cu0435u043du0442u044b */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* u0428u0440u0438u0444u0442u044b u0431u0435u0437 u0437u0430u0441u0435u0447u0435u043a */
+}
+
+* {
+  box-sizing: border-box; /* u041fu0440u0438u043cu0435u043du044fu0435u043c box-sizing u043au043e u0432u0441u0435u043c u044du043bu0435u043cu0435u043du0442u0430u043c */
+  -webkit-tap-highlight-color: transparent; /* u0423u0431u0438u0440u0430u0435u043c u043fu043eu0434u0441u0432u0435u0442u043au0443 u043fu0440u0438 u043du0430u0436u0430u0442u0438u0438 u043du0430 iOS */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* u0428u0440u0438u0444u0442u044b u0431u0435u0437 u0437u0430u0441u0435u0447u0435u043a u0434u043bu044f u0432u0441u0435u0445 u044du043bu0435u043cu0435u043du0442u043eu0432 */
+}
+
+/* u0421u0442u0438u043bu0438 u0434u043bu044f Telegram WebApp */
+:root {
+  --tg-theme-bg-color: #000000;
+  --tg-theme-text-color: #ffffff;
+  --tg-theme-hint-color: #999999;
+  --tg-theme-button-color: #2ea6ff;
+  --tg-theme-button-text-color: #ffffff;
+  
+  /* u0415u0441u043bu0438 u043du0435 u043fu043eu043bu0443u0447u0430u0435u043c u0431u0435u0437u043eu043fu0430u0441u043du044bu0435 u043eu0431u043bu0430u0441u0442u0438 u043eu0442 Telegram, u0438u0441u043fu043eu043bu044cu0437u0443u0435u043c u0437u043du0430u0447u0435u043du0438u044f u043fu043e u0443u043cu043eu043bu0447u0430u043du0438u044e */
+  --tg-safe-area-inset-top: 0px;
+  --tg-safe-area-inset-right: 0px;
+  --tg-safe-area-inset-bottom: 0px;
+  --tg-safe-area-inset-left: 0px;
+}
+
+/* u0421u0442u0438u043bu0438 u0434u043bu044f u0433u043bu0430u0432u043du043eu0433u043e u044du043au0440u0430u043du0430 */
+.main-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+  padding-top: calc(64px + var(--tg-safe-area-inset-top));
+  padding-bottom: calc(16px + var(--tg-safe-area-inset-bottom));
+  background-color: #000000;
+  overflow-y: auto;
+}
+
+.main-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 32px;
+  margin-top: 0;
+  align-self: flex-start;
+}
+
+.variants-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 500px;
+  align-self: center;
+}
+
+.variant-button {
+  padding: 16px;
+  background-color: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.variant-button:hover {
+  background-color: #2a2a2a;
+}
+
+.variant-button:active {
+  background-color: var(--tg-theme-button-color, #2ea6ff);
+  color: var(--tg-theme-button-text-color, #ffffff);
+}
+
+.variant-description {
+  display: block;
+  color: #999999;
+  font-size: 0.9rem;
+  margin-top: 4px;
+  font-weight: normal;
+}
