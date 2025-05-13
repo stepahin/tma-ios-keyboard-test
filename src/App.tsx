@@ -4,7 +4,7 @@ import { useTelegram } from './lib/telegram'
 import { useNavigate } from 'react-router-dom'
 
 function App() {
-  const { onReady, backButton, disableVerticalSwipe } = useTelegram()
+  const { onReady, backButton, disableVerticalSwipe, requestFullscreen, lockOrientation } = useTelegram()
   const navigate = useNavigate()
 
   // Инициализация после загрузки компонента
@@ -17,7 +17,13 @@ function App() {
     
     // Отключаем вертикальный свайп для закрытия приложения
     disableVerticalSwipe()
-  }, [onReady, backButton, disableVerticalSwipe])
+    
+    // Запрашиваем полноэкранный режим (Bot API 8.0+)
+    requestFullscreen()
+    
+    // Блокируем ориентацию экрана в текущем режиме (Bot API 8.0+)
+    lockOrientation()
+  }, [onReady, backButton, disableVerticalSwipe, requestFullscreen, lockOrientation])
 
   // Обработчик перехода на выбранный вариант
   const handleNavigate = (path: string) => {
