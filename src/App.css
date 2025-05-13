@@ -80,8 +80,38 @@ html, body, #root {
   transition: background-color 0.2s ease;
 }
 
+/* Красный фон для первой карточки */
+.variant-button-red {
+  background-color: rgba(255, 100, 100, 0.2); /* Бледно-красный */
+  border-color: rgba(255, 100, 100, 0.4);
+}
+
+/* Зеленый фон для второй карточки */
+.variant-button-green {
+  background-color: rgba(100, 255, 100, 0.2); /* Бледно-зеленый */
+  border-color: rgba(100, 255, 100, 0.4);
+}
+
+/* Желтый фон для остальных карточек */
+.variant-button-yellow {
+  background-color: rgba(255, 255, 100, 0.2); /* Бледно-желтый */
+  border-color: rgba(255, 255, 100, 0.4);
+}
+
 .variant-button:hover {
   background-color: #2a2a2a;
+}
+
+.variant-button-red:hover {
+  background-color: rgba(255, 100, 100, 0.3);
+}
+
+.variant-button-green:hover {
+  background-color: rgba(100, 255, 100, 0.3);
+}
+
+.variant-button-yellow:hover {
+  background-color: rgba(255, 255, 100, 0.3);
 }
 
 .variant-button:active {

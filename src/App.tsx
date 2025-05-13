@@ -36,7 +36,7 @@ function App() {
       
       <div className="variants-list">
         <button 
-          className="variant-button" 
+          className="variant-button variant-button-red" 
           onClick={() => handleNavigate('/ios-keyboard-1')}
         >
           iOS Keyboard 1
@@ -44,7 +44,7 @@ function App() {
         </button>
         
         <button 
-          className="variant-button" 
+          className="variant-button variant-button-green" 
           onClick={() => handleNavigate('/ios-keyboard-2')}
         >
           iOS Keyboard 2
@@ -52,7 +52,7 @@ function App() {
         </button>
         
         <button 
-          className="variant-button" 
+          className="variant-button variant-button-yellow" 
           onClick={() => handleNavigate('/ios-keyboard-3')}
         >
           iOS Keyboard 3
@@ -60,7 +60,7 @@ function App() {
         </button>
         
         <button 
-          className="variant-button" 
+          className="variant-button variant-button-yellow" 
           onClick={() => handleNavigate('/ios-keyboard-4')}
         >
           iOS Keyboard 4
@@ -68,7 +68,7 @@ function App() {
         </button>
         
         <button 
-          className="variant-button" 
+          className="variant-button variant-button-yellow" 
           onClick={() => handleNavigate('/ios-keyboard-5a')}
         >
           iOS Keyboard 5a
@@ -76,7 +76,7 @@ function App() {
         </button>
         
         <button 
-          className="variant-button" 
+          className="variant-button variant-button-yellow" 
           onClick={() => handleNavigate('/ios-keyboard-5b')}
         >
           iOS Keyboard 5b
