@@ -20,8 +20,7 @@ function App() {
   // u0420u0430u0441u0441u0447u0438u0442u044bu0432u0430u0435u043c u0432u044bu0441u043eu0442u0443 PromptForm u0441 u0443u0447u0435u0442u043eu043c u0432u044bu0441u043eu0442u044b u0442u0435u043au0441u0442u043eu0432u043eu0433u043e u043fu043eu043bu044f
   const promptHeight = basePromptFormHeight + textareaRows * rowHeight
   
-  // u041eu0442u0441u043bu0435u0436u0438u0432u0430u0435u043c u0442u0435u043au0443u0449u0443u044e u0432u044bu0441u043eu0442u0443 viewport
-  const [viewportStableHeight, setViewportStableHeight] = useState<number>(telegram?.viewportStableHeight || window.innerHeight)
+  // CSS u043fu0435u0440u0435u043cu0435u043du043du0430u044f u0430u0432u0442u043eu043cu0430u0442u0438u0447u0435u0441u043au0438 u043eu0431u043du043eu0432u043bu044fu0435u0442u0441u044f u0432 useTelegram
   
   // u041du043eu0432u044bu0439 u0441u043fu0438u0441u043eu043a u0438u0437u043eu0431u0440u0430u0436u0435u043du0438u0439
   const imageSlides = [
@@ -115,26 +114,11 @@ function App() {
     // u041eu0442u043au043bu044eu0447u0430u0435u043c u0432u0435u0440u0442u0438u043au0430u043bu044cu043du044bu0439 u0441u0432u0430u0439u043f u0434u043bu044f u0437u0430u043au0440u044bu0442u0438u044f u043fu0440u0438u043bu043eu0436u0435u043du0438u044f
     disableVerticalSwipe()
     
-    // u041eu0442u0441u043bu0435u0436u0438u0432u0430u0435u043c u0438u0437u043cu0435u043du0435u043du0438u044f viewport
-    if (telegram) {
-      const handleViewportChange = (event: any) => {
-        // u041eu0431u043du043eu0432u043bu044fu0435u043c u0442u043eu043bu044cu043au043e u043fu0440u0438 u0441u0442u0430u0431u0438u043bu044cu043du043eu043c u0441u043eu0441u0442u043eu044fu043du0438u0438
-        if (event.isStateStable) {
-          setViewportStableHeight(telegram.viewportStableHeight || window.innerHeight);
-        }
-      };
-      
-      telegram.onEvent('viewportChanged', handleViewportChange);
-      
-      // u0423u0434u0430u043bu044fu0435u043c u043eu0431u0440u0430u0431u043eu0442u0447u0438u043a u043fu0440u0438 u0440u0430u0437u043cu043eu043du0442u0438u0440u043eu0432u0430u043du0438u0438
-      return () => {
-        telegram.offEvent('viewportChanged', handleViewportChange);
-        backButton.offClick(() => navigate('/'))
-      };
-    } else {
-      return () => {
-        backButton.offClick(() => navigate('/'))
-      }
+    // u041eu0431u0440u0430u0431u043eu0442u0447u0438u043a u0438u0437u043cu0435u043du0435u043du0438u0439 viewport u0440u0435u0430u043bu0438u0437u043eu0432u0430u043d u0432 useTelegram
+    
+    // u0423u0434u0430u043bu044fu0435u043c u043eu0431u0440u0430u0431u043eu0442u0447u0438u043a u043fu0440u0438 u0440u0430u0437u043cu043eu043du0442u0438u0440u043eu0432u0430u043du0438u0438
+    return () => {
+      backButton.offClick(() => navigate('/'))
     }
   }, [safeAreaInsets, onReady, backButton, navigate, disableVerticalSwipe, telegram])
   
@@ -148,12 +132,7 @@ function App() {
   return (
     <div className="app-container">
       {/* u0417u0430u0433u043eu043bu043eu0432u043eu043a u0444u0438u043au0441u0438u0440u043eu0432u0430u043du043du044bu0439 u0432u0432u0435u0440u0445u0443 */}
-      <div className="tool-title">iOS Keyboard 7 (viewportStableHeight)</div>
-      
-      {/* u0418u043du0444u043eu0440u043cu0430u0446u0438u044f u043e viewport */}
-      <div className="viewport-info">
-        u0418u0441u043fu043eu043bu044cu0437u0443u0435u0442u0441u044f var(--tg-viewport-stable-height): {viewportStableHeight}px
-      </div>
+      <div className="tool-title">iOS Keyboard 7</div>
       
       {/* u0421u043eu0434u0435u0440u0436u0438u043cu043eu0435 u044du043au0440u0430u043du0430 */}
       <div className="content-area" onClick={handleContentClick}>

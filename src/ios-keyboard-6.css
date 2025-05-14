@@ -216,7 +216,7 @@ html, body, #root {
   padding: 8px 12px;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tab-button.active {
@@ -234,7 +234,7 @@ html, body, #root {
   font-size: 1rem;
   resize: none;
   outline: none;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .prompt-textarea:focus {
@@ -295,7 +295,7 @@ html, body, #root {
   padding: 12px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .send-button:active {

@@ -20,8 +20,7 @@ function App() {
   // Рассчитываем высоту PromptForm с учетом высоты текстового поля
   const promptHeight = basePromptFormHeight + textareaRows * rowHeight
   
-  // Отслеживаем текущую высоту viewport
-  const [viewportHeight, setViewportHeight] = useState<number>(telegram?.viewportHeight || window.innerHeight)
+  // CSS переменная автоматически обновляется в useTelegram
   
   // Новый список изображений
   const imageSlides = [
@@ -115,23 +114,11 @@ function App() {
     // Отключаем вертикальный свайп для закрытия приложения
     disableVerticalSwipe()
     
-    // Отслеживаем изменения viewport
-    if (telegram) {
-      const handleViewportChange = () => {
-        setViewportHeight(telegram.viewportHeight || window.innerHeight);
-      };
-      
-      telegram.onEvent('viewportChanged', handleViewportChange);
-      
-      // Удаляем обработчик при размонтировании
-      return () => {
-        telegram.offEvent('viewportChanged', handleViewportChange);
-        backButton.offClick(() => navigate('/'))
-      };
-    } else {
-      return () => {
-        backButton.offClick(() => navigate('/'))
-      }
+    // Обработчик изменений viewport реализован в useTelegram
+    
+    // Удаляем обработчик при размонтировании
+    return () => {
+      backButton.offClick(() => navigate('/'))
     }
   }, [safeAreaInsets, onReady, backButton, navigate, disableVerticalSwipe, telegram])
   
@@ -145,12 +132,7 @@ function App() {
   return (
     <div className="app-container">
       {/* Заголовок фиксированный вверху */}
-      <div className="tool-title">iOS Keyboard 6 (viewportHeight)</div>
-      
-      {/* Информация о viewport */}
-      <div className="viewport-info">
-        Используется var(--tg-viewport-height): {viewportHeight}px
-      </div>
+      <div className="tool-title">iOS Keyboard 6</div>
       
       {/* Содержимое экрана */}
       <div className="content-area" onClick={handleContentClick}>
