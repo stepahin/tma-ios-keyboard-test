@@ -98,6 +98,12 @@ html, body, #root {
   border-color: rgba(255, 255, 100, 0.4);
 }
 
+/* Фиолетовый фон для карточек 6 и 7 */
+.variant-button-purple {
+  background-color: rgba(139, 92, 246, 0.2); /* Бледно-фиолетовый */
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
 .variant-button:hover {
   background-color: #2a2a2a;
 }
@@ -112,6 +118,10 @@ html, body, #root {
 
 .variant-button-yellow:hover {
   background-color: rgba(255, 255, 100, 0.3);
+}
+
+.variant-button-purple:hover {
+  background-color: rgba(139, 92, 246, 0.3);
 }
 
 .variant-button:active {

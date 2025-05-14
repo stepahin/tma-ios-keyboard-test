@@ -55,6 +55,20 @@ export const useTelegram = () => {
     bottom: telegram?.safeAreaInset?.bottom || 0,
     left: telegram?.safeAreaInset?.left || 0,
   };
+  
+  // Устанавливаем CSS переменные для viewportHeight и viewportStableHeight
+  if (telegram) {
+    document.documentElement.style.setProperty('--tg-viewport-height', `${telegram.viewportHeight || window.innerHeight}px`);
+    document.documentElement.style.setProperty('--tg-viewport-stable-height', `${telegram.viewportStableHeight || window.innerHeight}px`);
+    
+    // Добавляем обработчик события viewportChanged для обновления CSS переменных
+    telegram.onEvent('viewportChanged', (event: any) => {
+      document.documentElement.style.setProperty('--tg-viewport-height', `${telegram.viewportHeight || window.innerHeight}px`);
+      if (event.isStateStable) {
+        document.documentElement.style.setProperty('--tg-viewport-stable-height', `${telegram.viewportStableHeight || window.innerHeight}px`);
+      }
+    });
+  }
 
   const onReady = () => {
     if (telegram) {

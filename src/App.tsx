@@ -82,6 +82,22 @@ function App() {
           iOS Keyboard 5b
           <span className="variant-description">Another attempt</span>
         </button>
+        
+        <button 
+          className="variant-button variant-button-purple" 
+          onClick={() => handleNavigate('/ios-keyboard-6')}
+        >
+          iOS Keyboard 6
+          <span className="variant-description">viewportHeight<br/>Использует var(--tg-viewport-height)</span>
+        </button>
+        
+        <button 
+          className="variant-button variant-button-purple" 
+          onClick={() => handleNavigate('/ios-keyboard-7')}
+        >
+          iOS Keyboard 7
+          <span className="variant-description">viewportStableHeight<br/>Использует var(--tg-viewport-stable-height)</span>
+        </button>
       </div>
     </div>
   )

@@ -1,0 +1,326 @@
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  height: var(--tg-viewport-height, 100vh); /* Используем переменную viewportHeight */
+  overflow: hidden;
+  margin: 0;
+  position: fixed; /* Фиксируем позицию, чтобы предотвратить сдвиг */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  background-color: #000000;
+  color: #ffffff;
+  max-width: 100vw; /* Ограничиваем максимальную ширину до viewport */
+  box-sizing: border-box; /* Чтобы padding не расширял элементы */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Шрифты без засечек */
+}
+
+* {
+  box-sizing: border-box; /* Применяем box-sizing ко всем элементам */
+  -webkit-tap-highlight-color: transparent; /* Убираем подсветку при нажатии на iOS */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Шрифты без засечек для всех элементов */
+}
+
+/* Стили для Telegram WebApp */
+:root {
+  --tg-theme-bg-color: #000000;
+  --tg-theme-text-color: #ffffff;
+  --tg-theme-hint-color: #999999;
+  --tg-theme-button-color: #2ea6ff;
+  --tg-theme-button-text-color: #ffffff;
+  
+  /* Если не получаем безопасные области от Telegram, используем значения по умолчанию */
+  --tg-safe-area-inset-top: 0px;
+  --tg-safe-area-inset-right: 0px;
+  --tg-safe-area-inset-bottom: 0px;
+  --tg-safe-area-inset-left: 0px;
+}
+
+/* Стили для компонентов приложения */
+.app-container {
+  width: 100%;
+  height: var(--tg-viewport-height, 100vh); /* Используем переменную viewportHeight */
+  display: flex;
+  flex-direction: column;
+  position: fixed; /* Фиксируем позицию контейнера */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  max-width: 100vw; /* Ограничиваем максимальную ширину до viewport */
+  margin: 0 auto; /* Центрируем контейнер */
+  transform: translateZ(0); /* Ускорение рендеринга */
+  -webkit-transform: translateZ(0);
+}
+
+.tool-title {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 16px;
+  padding-top: calc(12px + var(--tg-safe-area-inset-top)); /* Уменьшаем верхний отступ на 4px */
+  position: fixed;
+  top: -3px; /* Приподнимаем на 4px вверх */
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100vw;
+  background-color: rgba(50, 50, 50, 0.3); /* Полупрозрачный серый фон */
+  backdrop-filter: blur(5px); /* Добавляем эффект размытия */
+  -webkit-backdrop-filter: blur(5px); /* Для Safari */
+  z-index: 10;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Добавляем легкую тень */
+}
+
+.content-area {
+  flex: 1;
+  overflow: hidden;
+  padding-top: calc(56px + var(--tg-safe-area-inset-top));
+  /* Используем viewportHeight для расчета высоты */
+  height: calc(var(--tg-viewport-height, 100vh) - 56px - var(--tg-safe-area-inset-top));
+  position: relative;
+  width: 100%;
+}
+
+.horizontal-carousel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  max-height: calc(100% - 8px);
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Стили для Embla карусели */
+.embla {
+  overflow: hidden;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  max-width: 100vw; /* На всю ширину экрана */
+}
+
+.embla__container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;
+  max-width: 100vw; /* Ограничиваем ширину контейнера */
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  max-width: 100vw; /* Ограничиваем ширину слайда */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  overflow: hidden; /* Предотвращаем переполнение */
+}
+
+/* Новый стиль для обертки слайдов */
+.embla__slide__wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.embla__slide__img {
+  max-width: 100%;
+  max-height: calc(100% - 8px);
+  width: auto; /* Меняем на auto, чтобы сохранять пропорции */
+  height: auto;
+  object-fit: contain; /* Сохраняем пропорции изображений */
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.vertical-feed {
+  width: 100%;
+  height: calc(var(--tg-viewport-height, 100vh) - 56px - var(--tg-safe-area-inset-top));
+  overflow-y: auto;
+  padding: 0 16px;
+  padding-bottom: 0;
+  padding-top: 0;
+  position: absolute;
+  top: 0; /* Начинается с самого верха экрана */
+  left: 0;
+  right: 0;
+}
+
+/* Добавляем отступ для первой картинки в ленте, чтобы она не была полностью скрыта заголовком */
+.vertical-feed .feed-image:first-child {
+  margin-top: calc(56px + var(--tg-safe-area-inset-top) + 16px); /* Добавляем 16px отступ, как и сбоку */
+}
+
+.feed-image {
+  width: 100%;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.prompt-form {
+  padding: 16px;
+  padding-top: 8px;
+  padding-bottom: calc(16px + var(--tg-safe-area-inset-bottom));
+  background-color: #1a1a1a;
+  border-top: 1px solid #333333;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.prompt-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tab-button {
+  flex: 1;
+  background-color: #333333;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.tab-button.active {
+  background-color: #8B5CF6; /* Фиолетовый цвет для активной вкладки */
+  color: white;
+}
+
+.prompt-textarea {
+  width: 100%;
+  background-color: #333333;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  resize: none;
+  outline: none;
+  transition: background-color 0.2s ease;
+}
+
+.prompt-textarea:focus {
+  background-color: #444444;
+}
+
+.prompt-textarea::placeholder {
+  color: #999999;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.slider-label {
+  font-size: 0.875rem;
+  color: #999999;
+  min-width: 100px;
+}
+
+.html-slider {
+  -webkit-appearance: none;
+  appearance: none; /* Добавляем стандартное свойство */
+  width: 100%;
+  height: 8px;
+  background: #333333;
+  outline: none;
+  border-radius: 4px;
+}
+
+.html-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #8B5CF6; /* Фиолетовый цвет для ползунка */
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.html-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #8B5CF6; /* Фиолетовый цвет для ползунка */
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+}
+
+/* Добавляем стили для кнопки отправки */
+.send-button {
+  background-color: #8B5CF6; /* Фиолетовый цвет для кнопки */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.send-button:active {
+  background-color: #7c3aed; /* Темнее при нажатии */
+}
+
+/* Стили для iOS фикса */
+.ios-fix-spacer {
+  height: 1px;
+  width: 100%;
+  background: transparent;
+}
+
+/* Добавляем информационный текст */
+.viewport-info {
+  position: fixed;
+  top: calc(56px + var(--tg-safe-area-inset-top));
+  left: 0;
+  right: 0;
+  background-color: rgba(139, 92, 246, 0.8); /* Полупрозрачный фиолетовый */
+  color: white;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  text-align: center;
+  z-index: 20;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
