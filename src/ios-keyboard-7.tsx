@@ -8,21 +8,21 @@ function App() {
   const { safeAreaInsets, onReady, backButton, disableVerticalSwipe, telegram } = useTelegram()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<'horizontal' | 'vertical'>('horizontal')
-  // u0417u0430u043cu0435u043du044fu0435u043c u043fu0435u0440u0435u043cu0435u043du043du0443u044e u0434u043bu044f u0444u0438u043au0441u0438u0440u043eu0432u0430u043du043du043eu0439 u0432u044bu0441u043eu0442u044b PromptForm u043du0430 u0432u044bu0441u043eu0442u0443 u0442u0435u043au0441u0442u043eu0432u043eu0433u043e u043fu043eu043bu044f
-  const [textareaRows, setTextareaRows] = useState(2) // u041du0430u0447u0438u043du0430u0435u043c u0441 2 u0441u0442u0440u043eu043a
+  // Заменяем переменную для фиксированной высоты PromptForm на высоту текстового поля
+  const [textareaRows, setTextareaRows] = useState(2) // Начинаем с 2 строк
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const verticalFeedRef = useRef<HTMLDivElement>(null)
   
-  // u0412u044bu0441u043eu0442u0430 u043eu0434u043du043eu0439 u0441u0442u0440u043eu043au0438 (u043fu0440u0438u043cu0435u0440u043du043e) + u043fu0430u0434u0434u0438u043du0433u0438
-  const rowHeight = 24 // u0423u0432u0435u043bu0438u0447u0438u0432u0430u0435u043c u0432u044bu0441u043eu0442u0443 u0441u0442u0440u043eu043au0438 u0434u043bu044f u043bu0443u0447u0448u0435u0439 u0432u0438u0434u0438u043cu043eu0441u0442u0438
-  // u0411u0430u0437u043eu0432u0430u044f u0432u044bu0441u043eu0442u0430 PromptForm (u0431u0435u0437 u0443u0447u0435u0442u0430 u0442u0435u043au0441u0442u043eu0432u043eu0433u043e u043fu043eu043bu044f)
+  // Высота одной строки (примерно) + паддинги
+  const rowHeight = 24 // Увеличиваем высоту строки для лучшей видимости
+  // Базовая высота PromptForm (без учета текстового поля)
   const basePromptFormHeight = 128
-  // u0420u0430u0441u0441u0447u0438u0442u044bu0432u0430u0435u043c u0432u044bu0441u043eu0442u0443 PromptForm u0441 u0443u0447u0435u0442u043eu043c u0432u044bu0441u043eu0442u044b u0442u0435u043au0441u0442u043eu0432u043eu0433u043e u043fu043eu043bu044f
+  // Рассчитываем высоту PromptForm с учетом высоты текстового поля
   const promptHeight = basePromptFormHeight + textareaRows * rowHeight
   
-  // CSS u043fu0435u0440u0435u043cu0435u043du043du0430u044f u0430u0432u0442u043eu043cu0430u0442u0438u0447u0435u0441u043au0438 u043eu0431u043du043eu0432u043bu044fu0435u0442u0441u044f u0432 useTelegram
+  // CSS переменная автоматически обновляется в useTelegram
   
-  // u041du043eu0432u044bu0439 u0441u043fu0438u0441u043eu043a u0438u0437u043eu0431u0440u0430u0436u0435u043du0438u0439
+  // Новый список изображений
   const imageSlides = [
     'https://preview.reve.art/inspiration/7d5de70b-7a90-47a9-9427-81428b25fdb0.webp',
     'https://preview.reve.art/inspiration/dad0aa8e-a900-4a90-bf33-23f3954ce6de.webp',
@@ -137,11 +137,26 @@ function App() {
       {/* u0421u043eu0434u0435u0440u0436u0438u043cu043eu0435 u044du043au0440u0430u043du0430 */}
       <div className="content-area" onClick={handleContentClick}>
         {activeTab === 'horizontal' ? (
-          <div className="horizontal-carousel">
+          <div 
+            className="horizontal-carousel"
+            style={{ 
+              height: `calc(var(--tg-viewport-stable-height, 100vh) - 56px - ${promptHeight}px - var(--tg-safe-area-inset-top) - var(--tg-safe-area-inset-bottom))`,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden'
+            }}
+          >
             <EmblaCarousel slides={imageSlides} />
           </div>
         ) : (
-          <div className="vertical-feed" ref={verticalFeedRef}>
+          <div 
+            className="vertical-feed" 
+            ref={verticalFeedRef}
+            style={{
+              bottom: `calc(${promptHeight}px + var(--tg-safe-area-inset-bottom))`
+            }}
+          >
             {imageSlides.map((imageUrl, index) => (
               <img 
                 key={index}

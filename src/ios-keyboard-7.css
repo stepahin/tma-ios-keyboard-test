@@ -1,10 +1,10 @@
 html, body, #root {
   width: 100%;
   height: 100%;
-  height: var(--tg-viewport-stable-height, 100vh); /* u0418u0441u043fu043eu043bu044cu0437u0443u0435u043c u043fu0435u0440u0435u043cu0435u043du043du0443u044e viewportStableHeight */
+  height: var(--tg-viewport-stable-height, 100vh); /* Используем переменную viewportStableHeight */
   overflow: hidden;
   margin: 0;
-  position: fixed; /* u0424u0438u043au0441u0438u0440u0443u0435u043c u043fu043eu0437u0438u0446u0438u044e, u0447u0442u043eu0431u044b u043fu0440u0435u0434u043eu0442u0432u0440u0430u0442u0438u0442u044c u0441u0434u0432u0438u0433 */
+  position: fixed; /* Фиксируем позицию, чтобы предотвратить сдвиг */
   top: 0;
   left: 0;
   right: 0;
@@ -38,13 +38,13 @@ html, body, #root {
   --tg-safe-area-inset-left: 0px;
 }
 
-/* u0421u0442u0438u043bu0438 u0434u043bu044f u043au043eu043cu043fu043eu043du0435u043du0442u043eu0432 u043fu0440u0438u043bu043eu0436u0435u043du0438u044f */
+/* Стили для компонентов приложения */
 .app-container {
   width: 100%;
-  height: var(--tg-viewport-stable-height, 100vh); /* u0418u0441u043fu043eu043bu044cu0437u0443u0435u043c u043fu0435u0440u0435u043cu0435u043du043du0443u044e viewportStableHeight */
+  height: var(--tg-viewport-stable-height, 100vh); /* Используем переменную viewportStableHeight */
   display: flex;
   flex-direction: column;
-  position: fixed; /* u0424u0438u043au0441u0438u0440u0443u0435u043c u043fu043eu0437u0438u0446u0438u044e u043au043eu043du0442u0435u0439u043du0435u0440u0430 */
+  position: fixed; /* Фиксируем позицию контейнера */
   top: 0;
   left: 0;
   right: 0;
@@ -81,7 +81,7 @@ html, body, #root {
   flex: 1;
   overflow: hidden;
   padding-top: calc(56px + var(--tg-safe-area-inset-top));
-  /* u0418u0441u043fu043eu043bu044cu0437u0443u0435u043c viewportStableHeight u0434u043bu044f u0440u0430u0441u0447u0435u0442u0430 u0432u044bu0441u043eu0442u044b */
+  /* Используем viewportStableHeight для расчета высоты */
   height: calc(var(--tg-viewport-stable-height, 100vh) - 56px - var(--tg-safe-area-inset-top));
   position: relative;
   width: 100%;
@@ -96,6 +96,7 @@ html, body, #root {
   padding-bottom: 4px;
   max-width: 100vw;
   overflow: hidden;
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .carousel-image {
@@ -113,7 +114,7 @@ html, body, #root {
   height: 100%;
   display: flex;
   align-items: center;
-  max-width: 100vw; /* u041du0430 u0432u0441u044e u0448u0438u0440u0438u043du0443 u044du043au0440u0430u043du0430 */
+  max-width: 100vw; /* На всю ширину экрана */
 }
 
 .embla__container {
@@ -123,7 +124,7 @@ html, body, #root {
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: pan-y;
-  max-width: 100vw; /* u041eu0433u0440u0430u043du0438u0447u0438u0432u0430u0435u043c u0448u0438u0440u0438u043du0443 u043au043eu043du0442u0435u0439u043du0435u0440u0430 */
+  max-width: 100vw; /* Ограничиваем ширину контейнера */
 }
 
 .embla__slide {
@@ -162,20 +163,22 @@ html, body, #root {
 
 .vertical-feed {
   width: 100%;
-  height: calc(var(--tg-viewport-stable-height, 100vh) - 56px - var(--tg-safe-area-inset-top));
+  height: auto; /* Высота будет определяться верхней и нижней границами */
   overflow-y: auto;
   padding: 0 16px;
   padding-bottom: 0;
   padding-top: 0;
   position: absolute;
-  top: 0; /* u041du0430u0447u0438u043du0430u0435u0442u0441u044f u0441 u0441u0430u043cu043eu0433u043e u0432u0435u0440u0445u0430 u044du043au0440u0430u043du0430 */
+  top: 0; /* Начинается с самого верха экрана */
+  /* Нижняя граница будет динамически устанавливаться в компоненте через style */
   left: 0;
   right: 0;
+  transition: bottom 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* u0414u043eu0431u0430u0432u043bu044fu0435u043c u043eu0442u0441u0442u0443u043f u0434u043bu044f u043fu0435u0440u0432u043eu0439 u043au0430u0440u0442u0438u043du043au0438 u0432 u043bu0435u043du0442u0435, u0447u0442u043eu0431u044b u043eu043du0430 u043du0435 u0431u044bu043bu0430 u043fu043eu043bu043du043eu0441u0442u044cu044e u0441u043au0440u044bu0442u0430 u0437u0430u0433u043eu043bu043eu0432u043au043eu043c */
+/* Добавляем отступ для первой картинки в ленте, чтобы она не была полностью скрыта заголовком */
 .vertical-feed .feed-image:first-child {
-  margin-top: calc(56px + var(--tg-safe-area-inset-top) + 16px); /* u0414u043eu0431u0430u0432u043bu044fu0435u043c 16px u043eu0442u0441u0442u0443u043f, u043au0430u043a u0438 u0441u0431u043eu043au0443 */
+  margin-top: calc(56px + var(--tg-safe-area-inset-top) + 16px); /* Добавляем 16px отступ, как и сбоку */
 }
 
 .feed-image {
@@ -199,6 +202,7 @@ html, body, #root {
   left: 0;
   right: 0;
   z-index: 5;
+  transition: height 0.05s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .prompt-tabs {
@@ -234,7 +238,7 @@ html, body, #root {
   font-size: 1rem;
   resize: none;
   outline: none;
-  transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1), height 0.05s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .prompt-textarea:focus {

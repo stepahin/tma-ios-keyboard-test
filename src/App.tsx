@@ -98,14 +98,6 @@ function App() {
           iOS Keyboard 7
           <span className="variant-description">viewportStableHeight<br/>Использует var(--tg-viewport-stable-height)</span>
         </button>
-        
-        <button 
-          className="variant-button variant-button-purple" 
-          onClick={() => handleNavigate('/ios-keyboard-8')}
-        >
-          iOS Keyboard 8
-          <span className="variant-description">Ускоренные анимации</span>
-        </button>
       </div>
     </div>
   )
