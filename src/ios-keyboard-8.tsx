@@ -97,6 +97,19 @@ function App() {
     setTextareaRows(newRows)
   }
   
+  // Принудительное обновление masonic при изменении высоты
+  useEffect(() => {
+    if (activeTab === 'masonic') {
+      // Небольшая задержка для завершения анимации изменения высоты
+      const timer = setTimeout(() => {
+        // Принудительно вызываем resize event для обновления masonic
+        window.dispatchEvent(new Event('resize'))
+      }, 100)
+      
+      return () => clearTimeout(timer)
+    }
+  }, [promptHeight, activeTab])
+  
   // Добавляем хак для фиксации позиционирования в iOS
   useEffect(() => {
     // Проверяем, является ли устройство iOS
@@ -225,6 +238,7 @@ function App() {
             }}
           >
             <Masonry
+              key={`masonic-${promptHeight}`}
               items={masonicItems}
               render={MasonryCard}
               columnGutter={4}
