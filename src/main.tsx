@@ -11,6 +11,7 @@ import KeyboardTest5a from './ios-keyboard-5a.tsx'
 import KeyboardTest5b from './ios-keyboard-5b.tsx'
 import KeyboardTest6 from './ios-keyboard-6.tsx'
 import KeyboardTest7 from './ios-keyboard-7.tsx'
+import KeyboardTest8 from './ios-keyboard-8.tsx'
 
 // Get base path from Vite environment or use empty string for local development
 const basePath = import.meta.env.BASE_URL || '/';
@@ -52,6 +53,10 @@ const router = createBrowserRouter(
     {
       path: '/ios-keyboard-7',
       element: <KeyboardTest7 />,
+    },
+    {
+      path: '/ios-keyboard-8',
+      element: <KeyboardTest8 />,
     },
   ],
   { basename: basePath }

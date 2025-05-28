@@ -98,6 +98,14 @@ function App() {
           iOS Keyboard 7
           <span className="variant-description">viewportStableHeight<br/>Использует var(--tg-viewport-stable-height)</span>
         </button>
+        
+        <button 
+          className="variant-button variant-button-blue" 
+          onClick={() => handleNavigate('/ios-keyboard-8')}
+        >
+          iOS Keyboard 8
+          <span className="variant-description">Masonic Grid<br/>Добавлен третий таб с masonic сеткой</span>
+        </button>
       </div>
     </div>
   )

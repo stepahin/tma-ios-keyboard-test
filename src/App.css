@@ -8,14 +8,14 @@ html, body, #root {
   background-color: #000000;
   color: #ffffff;
   max-width: 100vw; /* u041eu0433u0440u0430u043du0438u0447u0438u0432u0430u0435u043c u043cu0430u043au0441u0438u043cu0430u043bu044cu043du0443u044e u0448u0438u0440u0438u043du0443 u0434u043e viewport */
-  box-sizing: border-box; /* u0427u0442u043eu0431u044b padding u043du0435 u0440u0430u0441u0448u0438u0440u044fu043b u044du043bu0435u043cu0435u043du0442u044b */
+  box-sizing: border-box; /* u0427u0442u043eu0431u044b padding u043du0435 u0440u0430u0441u0448u0438u0440u044fu043b u044du043bu0435u043cu0435u043dn0442u044b */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* u0428u0440u0438u0444u0442u044b u0431u0435u0437 u0437u0430u0441u0435u0447u0435u043a */
 }
 
 * {
-  box-sizing: border-box; /* u041fu0440u0438u043cu0435u043du044fu0435u043c box-sizing u043au043e u0432u0441u0435u043c u044du043bu0435u043cu0435u043du0442u0430u043c */
+  box-sizing: border-box; /* u041fu0440u0438u043cu0435u043du044fu0435u043c box-sizing u043au043e u0432u0441u0435u043c u044du043bu0435u043cu0435u043dn0442u0430u043c */
   -webkit-tap-highlight-color: transparent; /* u0423u0431u0438u0440u0430u0435u043c u043fu043eu0434u0441u0432u0435u0442u043au0443 u043fu0440u0438 u043du0430u0436u0430u0442u0438u0438 u043du0430 iOS */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* u0428u0440u0438u0444u0442u044b u0431u0435u0437 u0437u0430u0441u0435u0447u0435u043a u0434u043bu044f u0432u0441u0435u0445 u044du043bu0435u043cu0435u043du0442u043eu0432 */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* u0428u0440u0438u0444u0442u044b u0431u0435u0437 u0437u0430u0441u0435u0447u0435u043a u0434u043bu044f u0432u0441u0435u0445 u044du043bu0435u043cu0435u043dn0442u043eu0432 */
 }
 
 /* u0421u0442u0438u043bu0438 u0434u043bu044f Telegram WebApp */
@@ -26,7 +26,7 @@ html, body, #root {
   --tg-theme-button-color: #2ea6ff;
   --tg-theme-button-text-color: #ffffff;
   
-  /* u0415u0441u043bu0438 u043du0435 u043fu043eu043bu0443u0447u0430u0435u043c u0431u0435u0437u043eu043fu0430u0441u043du044bu0435 u043eu0431u043bu0430u0441u0442u0438 u043eu0442 Telegram, u0438u0441u043fu043eu043bu044cu0437u0443u0435u043c u0437u043du0430u0447u0435u043du0438u044f u043fu043e u0443u043cu043eu043bu0447u0430u043du0438u044e */
+  /* u0415u0441u043bu0438 u043du0435 u043fu043eu043bu0443u0447u0430u0435u043c u0431u0435u0437u043eu043fu0430u0441u043dn044bu0435 u043eu0431u043bu0430u0441u0442u0438 u043eu0442 Telegram, u0438u0441u043fu043eu043bu044cu0437u0443u0435u043c u0437u043du0430u0447u0435u043du0438u044f u043fu043e u0443u043cu043eu043bul0447u0430u043du0438u044e */
   --tg-safe-area-inset-top: 0px;
   --tg-safe-area-inset-right: 0px;
   --tg-safe-area-inset-bottom: 0px;
@@ -104,6 +104,12 @@ html, body, #root {
   border-color: rgba(139, 92, 246, 0.4);
 }
 
+/* Синий фон для карточки 8 */
+.variant-button-blue {
+  background-color: rgba(46, 166, 255, 0.2); /* Бледно-синий */
+  border-color: rgba(46, 166, 255, 0.4);
+}
+
 .variant-button:hover {
   background-color: #2a2a2a;
 }
@@ -122,6 +128,10 @@ html, body, #root {
 
 .variant-button-purple:hover {
   background-color: rgba(139, 92, 246, 0.3);
+}
+
+.variant-button-blue:hover {
+  background-color: rgba(46, 166, 255, 0.3);
 }
 
 .variant-button:active {
