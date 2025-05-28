@@ -179,7 +179,7 @@ function App() {
   useEffect(() => {
     if (promptFormRef.current) {
       const isIncreasing = promptHeight > previousPromptHeight
-      const transitionSpeed = isIncreasing ? '0.02s' : '0.05s' // Быстрее при поднятии, медленнее при опускании
+      const transitionSpeed = isIncreasing ? '0.01s' : '0.05s' // Быстрее при поднятии, медленнее при опускании
       promptFormRef.current.style.transition = `height ${transitionSpeed} cubic-bezier(0.4, 0, 0.2, 1)`
       setPreviousPromptHeight(promptHeight)
     }
