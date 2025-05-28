@@ -14,6 +14,7 @@ function App() {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const verticalFeedRef = useRef<HTMLDivElement>(null)
   const [masonryKey, setMasonryKey] = useState(0) // Ключ для принудительного обновления masonic
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false) // Состояние клавиатуры
   
   // Высота одной строки (примерно) + паддинги
   const rowHeight = 24 // Увеличиваем высоту строки для лучшей видимости
@@ -196,6 +197,28 @@ function App() {
     }
   }, [activeTab])
   
+  // Отслеживание состояния клавиатуры
+  useEffect(() => {
+    const textarea = textareaRef.current
+    if (!textarea) return
+
+    const handleFocus = () => {
+      setIsKeyboardOpen(true)
+    }
+
+    const handleBlur = () => {
+      setIsKeyboardOpen(false)
+    }
+
+    textarea.addEventListener('focus', handleFocus)
+    textarea.addEventListener('blur', handleBlur)
+
+    return () => {
+      textarea.removeEventListener('focus', handleFocus)
+      textarea.removeEventListener('blur', handleBlur)
+    }
+  }, [])
+  
   // Обработчик снятия фокуса с текстового поля при клике вне PromptForm
   const handleContentClick = () => {
     if (textareaRef.current && document.activeElement === textareaRef.current) {
@@ -265,8 +288,8 @@ function App() {
         style={{
           height: `calc(${promptHeight}px + var(--tg-safe-area-inset-bottom))`,
           paddingBottom: `calc(16px + var(--tg-safe-area-inset-bottom))`,
-          // Для masonic таба приподнимаем prompt form на Android hack offset
-          bottom: activeTab === 'masonic' && isAndroid ? `${androidHackOffset}px` : '0'
+          // Для masonic таба на Android приподнимаем prompt form только при открытой клавиатуре
+          bottom: activeTab === 'masonic' && isAndroid && isKeyboardOpen ? `${androidHackOffset}px` : '0'
         }}
       >
         {/* Табы для переключения между Horizontal carousel, Vertical feed и Masonic grid */}
