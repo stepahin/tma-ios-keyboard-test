@@ -264,7 +264,9 @@ function App() {
         className="prompt-form" 
         style={{
           height: `calc(${promptHeight}px + var(--tg-safe-area-inset-bottom))`,
-          paddingBottom: `calc(16px + var(--tg-safe-area-inset-bottom))`
+          paddingBottom: `calc(16px + var(--tg-safe-area-inset-bottom))`,
+          // Для masonic таба приподнимаем prompt form на Android hack offset
+          bottom: activeTab === 'masonic' && isAndroid ? `${androidHackOffset}px` : '0'
         }}
       >
         {/* Табы для переключения между Horizontal carousel, Vertical feed и Masonic grid */}
