@@ -22,8 +22,8 @@ function App() {
   // Android hack offset - компенсация неточности viewport только на Android
   const isAndroid = /Android/.test(navigator.userAgent)
   const androidHackOffset = isAndroid ? safeAreaInsets.bottom : 0
-  // Рассчитываем высоту PromptForm с учетом высоты текстового поля (БЕЗ Android hack offset)
-  const promptHeight = basePromptFormHeight + textareaRows * rowHeight
+  // Рассчитываем высоту PromptForm с учетом высоты текстового поля и Android hack offset
+  const promptHeight = basePromptFormHeight + textareaRows * rowHeight + androidHackOffset
   
   // CSS переменная автоматически обновляется в useTelegram
   
@@ -176,7 +176,7 @@ function App() {
       }, 100)
       return () => clearTimeout(timer)
     }
-  }, [promptHeight, activeTab, androidHackOffset])
+  }, [promptHeight, activeTab])
   
   // Обработчик изменения размера окна для masonic
   useEffect(() => {
@@ -244,7 +244,8 @@ function App() {
           <div 
             className="masonic-container"
             style={{
-              paddingBottom: `calc(${basePromptFormHeight + textareaRows * rowHeight}px + var(--tg-safe-area-inset-bottom) + ${androidHackOffset}px)`
+              height: `calc(var(--tg-viewport-stable-height, 100vh) - ${androidHackOffset}px)`,
+              paddingBottom: `calc(${promptHeight}px + var(--tg-safe-area-inset-bottom))`
             }}
           >
             <Masonry
