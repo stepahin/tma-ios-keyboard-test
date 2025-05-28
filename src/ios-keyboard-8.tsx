@@ -18,8 +18,10 @@ function App() {
   const rowHeight = 24 // Увеличиваем высоту строки для лучшей видимости
   // Базовая высота PromptForm (без учета текстового поля)
   const basePromptFormHeight = 128
-  // Рассчитываем высоту PromptForm с учетом высоты текстового поля
-  const promptHeight = basePromptFormHeight + textareaRows * rowHeight
+  // Android hack offset - компенсация неточности viewport на Android
+  const androidHackOffset = safeAreaInsets.bottom
+  // Рассчитываем высоту PromptForm с учетом высоты текстового поля и Android hack offset
+  const promptHeight = basePromptFormHeight + textareaRows * rowHeight + androidHackOffset
   
   // CSS переменная автоматически обновляется в useTelegram
   
