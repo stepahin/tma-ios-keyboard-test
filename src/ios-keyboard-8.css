@@ -191,7 +191,6 @@ html, body, #root {
 .masonic-grid {
   width: 100%;
   position: relative;
-  padding: 0 8px;
 }
 
 .masonry-card {

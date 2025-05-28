@@ -44,7 +44,6 @@ function App() {
     'https://preview.reve.art/inspiration/7c6a134d-c2e5-4c2e-879d-a0794b42366d.webp',
     'https://preview.reve.art/inspiration/4fa50eac-33c8-433c-945e-b145590c36fb.webp',
     'https://preview.reve.art/inspiration/59ab8aec-faf6-4faf-aae4-0aae52b5a238.webp',
-    // Новые изображения для тестирования производительности
     'https://preview.reve.art/inspiration/2b510de9-a6e0-4a6e-8b72-34b79ec2a7d4.webp',
     'https://preview.reve.art/inspiration/3cb0c0f7-6b0d-46b0-a0ea-ea0ee98f2248.webp',
     'https://preview.reve.art/inspiration/2aba8cb2-03cc-403c-bfec-a7fe462765a1.webp',
@@ -213,8 +212,9 @@ function App() {
             className="masonic-grid"
             style={{
               height: `calc(var(--tg-viewport-stable-height, 100vh) - 56px - ${promptHeight}px - var(--tg-safe-area-inset-top) - var(--tg-safe-area-inset-bottom))`,
-              paddingTop: 'calc(56px + var(--tg-safe-area-inset-top))',
-              overflow: 'auto'
+              overflow: 'auto',
+              paddingLeft: '8px',
+              paddingRight: '8px'
             }}
           >
             <Masonry
