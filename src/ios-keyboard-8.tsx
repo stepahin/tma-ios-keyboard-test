@@ -13,13 +13,16 @@ function App() {
   const [textareaRows, setTextareaRows] = useState(2) // Начинаем с 2 строк
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const verticalFeedRef = useRef<HTMLDivElement>(null)
+  const promptFormRef = useRef<HTMLDivElement>(null)
+  const [previousPromptHeight, setPreviousPromptHeight] = useState(0)
   
   // Высота одной строки (примерно) + паддинги
   const rowHeight = 24 // Увеличиваем высоту строки для лучшей видимости
   // Базовая высота PromptForm (без учета текстового поля)
   const basePromptFormHeight = 128
-  // Android hack offset - компенсация неточности viewport на Android
-  const androidHackOffset = safeAreaInsets.bottom
+  // Android hack offset - компенсация неточности viewport только на Android
+  const isAndroid = /Android/.test(navigator.userAgent)
+  const androidHackOffset = isAndroid ? safeAreaInsets.bottom : 0
   // Рассчитываем высоту PromptForm с учетом высоты текстового поля и Android hack offset
   const promptHeight = basePromptFormHeight + textareaRows * rowHeight + androidHackOffset
   
@@ -172,6 +175,16 @@ function App() {
     }
   }
   
+  // Динамическое управление скоростью анимации PromptForm
+  useEffect(() => {
+    if (promptFormRef.current) {
+      const isIncreasing = promptHeight > previousPromptHeight
+      const transitionSpeed = isIncreasing ? '0.02s' : '0.05s' // Быстрее при поднятии, медленнее при опускании
+      promptFormRef.current.style.transition = `height ${transitionSpeed} cubic-bezier(0.4, 0, 0.2, 1)`
+      setPreviousPromptHeight(promptHeight)
+    }
+  }, [promptHeight, previousPromptHeight])
+  
   return (
     <div className="app-container">
       {/* Заголовок фиксированный вверху */}
@@ -241,6 +254,7 @@ function App() {
           height: `calc(${promptHeight}px + var(--tg-safe-area-inset-bottom))`,
           paddingBottom: `calc(16px + var(--tg-safe-area-inset-bottom))`
         }}
+        ref={promptFormRef}
       >
         {/* Табы для переключения между Horizontal carousel, Vertical feed и Masonic grid */}
         <div className="prompt-tabs">
