@@ -223,7 +223,7 @@ html, body, #root {
   left: 0;
   right: 0;
   z-index: 5;
-  transition: height 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: height 0.025s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .prompt-tabs {
