@@ -96,6 +96,7 @@ html, body, #root {
   padding-bottom: 4px;
   max-width: 100vw;
   overflow: hidden;
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .carousel-image {
@@ -192,28 +193,19 @@ html, body, #root {
   position: relative;
 }
 
-/* Masonic grid container */
-.masonic-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--tg-viewport-stable-height, 100vh);
-  overflow: auto;
-  padding-top: calc(56px + var(--tg-safe-area-inset-top));
-  /* padding-bottom задается динамически через inline стили */
-}
-
-/* Masonic card styles */
 .masonry-card {
-  margin-bottom: 4px;
+  margin-bottom: 0px !important;
   border-radius: 16px;
   overflow: hidden;
+  background-color: #1a1a1a;
 }
 
 .masonry-image {
+  width: 100%;
+  height: auto;
   display: block;
   border-radius: 16px;
+  margin-bottom: 0 !important;
 }
 
 .prompt-form {

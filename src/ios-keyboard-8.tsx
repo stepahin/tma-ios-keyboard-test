@@ -13,8 +13,7 @@ function App() {
   const [textareaRows, setTextareaRows] = useState(2) // Начинаем с 2 строк
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const verticalFeedRef = useRef<HTMLDivElement>(null)
-  const [masonryKey, setMasonryKey] = useState(0) // Ключ для принудительного обновления masonic
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false) // Состояние клавиатуры
+  const masonicGridRef = useRef<HTMLDivElement>(null)
   
   // Высота одной строки (примерно) + паддинги
   const rowHeight = 24 // Увеличиваем высоту строки для лучшей видимости
@@ -168,56 +167,27 @@ function App() {
     }
   }, [safeAreaInsets, onReady, backButton, navigate, disableVerticalSwipe, telegram])
   
-  // Принудительное обновление masonic при изменении высоты
+  // Принудительное обновление masonic сетки при изменении высоты
   useEffect(() => {
-    if (activeTab === 'masonic') {
-      // Небольшая задержка для завершения CSS transitions
-      const timer = setTimeout(() => {
-        setMasonryKey(prev => prev + 1)
+    if (masonicGridRef.current && activeTab === 'masonic') {
+      // Принудительно вызываем resize event для masonic
+      const resizeEvent = new Event('resize')
+      window.dispatchEvent(resizeEvent)
+      
+      // Дополнительно прокручиваем на 1px и обратно для принудительного обновления
+      setTimeout(() => {
+        if (masonicGridRef.current) {
+          const currentScroll = masonicGridRef.current.scrollTop
+          masonicGridRef.current.scrollTop = currentScroll + 1
+          setTimeout(() => {
+            if (masonicGridRef.current) {
+              masonicGridRef.current.scrollTop = currentScroll
+            }
+          }, 10)
+        }
       }, 100)
-      return () => clearTimeout(timer)
     }
   }, [promptHeight, activeTab])
-  
-  // Обработчик изменения размера окна для masonic
-  useEffect(() => {
-    if (activeTab === 'masonic') {
-      const handleResize = () => {
-        setMasonryKey(prev => prev + 1)
-      }
-      
-      window.addEventListener('resize', handleResize)
-      // Также слушаем изменения viewport в Telegram
-      window.addEventListener('orientationchange', handleResize)
-      
-      return () => {
-        window.removeEventListener('resize', handleResize)
-        window.removeEventListener('orientationchange', handleResize)
-      }
-    }
-  }, [activeTab])
-  
-  // Отслеживание состояния клавиатуры
-  useEffect(() => {
-    const textarea = textareaRef.current
-    if (!textarea) return
-
-    const handleFocus = () => {
-      setIsKeyboardOpen(true)
-    }
-
-    const handleBlur = () => {
-      setIsKeyboardOpen(false)
-    }
-
-    textarea.addEventListener('focus', handleFocus)
-    textarea.addEventListener('blur', handleBlur)
-
-    return () => {
-      textarea.removeEventListener('focus', handleFocus)
-      textarea.removeEventListener('blur', handleBlur)
-    }
-  }, [])
   
   // Обработчик снятия фокуса с текстового поля при клике вне PromptForm
   const handleContentClick = () => {
@@ -265,18 +235,25 @@ function App() {
           </div>
         ) : (
           <div 
-            className="masonic-container"
+            className="masonic-grid"
+            ref={masonicGridRef}
             style={{
+              height: `var(--tg-viewport-stable-height, 100vh)`,
+              overflow: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              paddingTop: 'calc(56px + var(--tg-safe-area-inset-top))',
               paddingBottom: `calc(${promptHeight}px + var(--tg-safe-area-inset-bottom))`
             }}
           >
             <Masonry
-              key={masonryKey}
               items={masonicItems}
+              render={MasonryCard}
               columnGutter={4}
               columnWidth={150}
               overscanBy={20}
-              render={MasonryCard}
             />
           </div>
         )}
@@ -287,9 +264,7 @@ function App() {
         className="prompt-form" 
         style={{
           height: `calc(${promptHeight}px + var(--tg-safe-area-inset-bottom))`,
-          paddingBottom: `calc(16px + var(--tg-safe-area-inset-bottom))`,
-          // Для masonic таба на Android приподнимаем prompt form только при открытой клавиатуре
-          bottom: activeTab === 'masonic' && isAndroid && isKeyboardOpen ? `${androidHackOffset}px` : '0'
+          paddingBottom: `calc(16px + var(--tg-safe-area-inset-bottom))`
         }}
       >
         {/* Табы для переключения между Horizontal carousel, Vertical feed и Masonic grid */}
