@@ -13,6 +13,7 @@ function App() {
   const [textareaRows, setTextareaRows] = useState(2) // Начинаем с 2 строк
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const verticalFeedRef = useRef<HTMLDivElement>(null)
+  const [masonryKey, setMasonryKey] = useState(0) // Ключ для принудительного обновления masonic
   
   // Высота одной строки (примерно) + паддинги
   const rowHeight = 24 // Увеличиваем высоту строки для лучшей видимости
@@ -97,19 +98,6 @@ function App() {
     setTextareaRows(newRows)
   }
   
-  // Принудительное обновление masonic при изменении высоты
-  useEffect(() => {
-    if (activeTab === 'masonic') {
-      // Небольшая задержка для завершения анимации изменения высоты
-      const timer = setTimeout(() => {
-        // Принудительно вызываем resize event для обновления masonic
-        window.dispatchEvent(new Event('resize'))
-      }, 100)
-      
-      return () => clearTimeout(timer)
-    }
-  }, [promptHeight, activeTab])
-  
   // Добавляем хак для фиксации позиционирования в iOS
   useEffect(() => {
     // Проверяем, является ли устройство iOS
@@ -179,6 +167,35 @@ function App() {
     }
   }, [safeAreaInsets, onReady, backButton, navigate, disableVerticalSwipe, telegram])
   
+  // Принудительное обновление masonic при изменении высоты
+  useEffect(() => {
+    if (activeTab === 'masonic') {
+      // Небольшая задержка для завершения CSS transitions
+      const timer = setTimeout(() => {
+        setMasonryKey(prev => prev + 1)
+      }, 100)
+      return () => clearTimeout(timer)
+    }
+  }, [promptHeight, activeTab])
+  
+  // Обработчик изменения размера окна для masonic
+  useEffect(() => {
+    if (activeTab === 'masonic') {
+      const handleResize = () => {
+        setMasonryKey(prev => prev + 1)
+      }
+      
+      window.addEventListener('resize', handleResize)
+      // Также слушаем изменения viewport в Telegram
+      window.addEventListener('orientationchange', handleResize)
+      
+      return () => {
+        window.removeEventListener('resize', handleResize)
+        window.removeEventListener('orientationchange', handleResize)
+      }
+    }
+  }, [activeTab])
+  
   // Обработчик снятия фокуса с текстового поля при клике вне PromptForm
   const handleContentClick = () => {
     if (textareaRef.current && document.activeElement === textareaRef.current) {
@@ -225,25 +242,18 @@ function App() {
           </div>
         ) : (
           <div 
-            className="masonic-grid"
+            className="masonic-container"
             style={{
-              height: `var(--tg-viewport-stable-height, 100vh)`,
-              overflow: 'auto',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              paddingTop: 'calc(56px + var(--tg-safe-area-inset-top))',
               paddingBottom: `calc(${promptHeight}px + var(--tg-safe-area-inset-bottom))`
             }}
           >
             <Masonry
-              key={`masonic-${promptHeight}`}
+              key={masonryKey}
               items={masonicItems}
-              render={MasonryCard}
               columnGutter={4}
               columnWidth={150}
-              overscanBy={5}
+              overscanBy={20}
+              render={MasonryCard}
             />
           </div>
         )}
