@@ -198,7 +198,7 @@ html, body, #root {
   top: 0;
   left: 0;
   right: 0;
-  /* height задается динамически через inline стили с учетом Android hack offset */
+  height: var(--tg-viewport-stable-height, 100vh);
   overflow: auto;
   padding-top: calc(56px + var(--tg-safe-area-inset-top));
   /* padding-bottom задается динамически через inline стили */

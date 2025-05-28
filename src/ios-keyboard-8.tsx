@@ -244,7 +244,6 @@ function App() {
           <div 
             className="masonic-container"
             style={{
-              height: `calc(var(--tg-viewport-stable-height, 100vh) - ${androidHackOffset}px)`,
               paddingBottom: `calc(${promptHeight}px + var(--tg-safe-area-inset-bottom))`
             }}
           >
