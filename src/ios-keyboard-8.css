@@ -194,8 +194,8 @@ html, body, #root {
 }
 
 .masonry-card {
-  margin-bottom: 8px;
-  border-radius: 8px;
+  margin-bottom: 0px !important;
+  border-radius: 16px;
   overflow: hidden;
   background-color: #1a1a1a;
 }
@@ -204,12 +204,8 @@ html, body, #root {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 8px;
-  transition: transform 0.2s ease;
-}
-
-.masonry-image:hover {
-  transform: scale(1.02);
+  border-radius: 16px;
+  margin-bottom: 0 !important;
 }
 
 .prompt-form {

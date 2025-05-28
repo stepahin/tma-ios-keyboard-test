@@ -211,21 +211,20 @@ function App() {
           <div 
             className="masonic-grid"
             style={{
-              height: `calc(var(--tg-viewport-stable-height, 100vh) - 56px - ${promptHeight}px - var(--tg-safe-area-inset-top) - var(--tg-safe-area-inset-bottom))`,
+              height: `var(--tg-viewport-stable-height, 100vh)`,
               overflow: 'auto',
               position: 'absolute',
               top: 0,
               left: 0,
               right: 0,
               paddingTop: 'calc(56px + var(--tg-safe-area-inset-top))',
-              paddingLeft: '8px',
-              paddingRight: '8px'
+              paddingBottom: `calc(${promptHeight}px + var(--tg-safe-area-inset-bottom))`
             }}
           >
             <Masonry
               items={masonicItems}
               render={MasonryCard}
-              columnGutter={8}
+              columnGutter={4}
               columnWidth={150}
               overscanBy={5}
             />
