@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const VIDEO_URL = 'https://replicate.delivery/xezq/mDkBKBJCUe3oTqbYB98SWOOQebwqWeTrwDVNN3C7wCfxJLpSB/tmpmc15wyjc.mp4';
 
 export default function DownloadMp4Demo() {
-  const { onReady, backButton, disableVerticalSwipe, telegram } = useTelegram();
+  const { onReady, backButton, disableVerticalSwipe } = useTelegram();
   const navigate = useNavigate();
 
   useEffect(() => {
