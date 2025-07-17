@@ -32,7 +32,19 @@ function App() {
 
   return (
     <div className="main-container">
-      <div className="main-title">iOS Keyboard Test Variants</div>
+      <div className="main-title">iOS Video Download Test</div>
+      
+      <div className="variants-list">
+        <button 
+          className="variant-button variant-button-pink" 
+          onClick={() => handleNavigate('/download-mp4-demo')}
+        >
+          Download MP4 File demo
+          <span className="variant-description">Should be saved to <b>Photos</b> on iOS, not <b>Files</b></span>
+        </button>
+      </div>
+
+      <div className="main-title" style={{ marginTop: '48px' }}>iOS Keyboard Test Variants</div>
       
       <div className="variants-list">
         <button 
@@ -107,13 +119,7 @@ function App() {
           <span className="variant-description">Masonic Grid<br/>Добавлен третий таб с masonic сеткой</span>
         </button>
 
-        <button 
-          className="variant-button variant-button-mp4" 
-          onClick={() => handleNavigate('/download-mp4-demo')}
-        >
-          Download MP4 File demo
-          <span className="variant-description">Should be saved to <b>Photos</b> on iOS, not <b>Files</b></span>
-        </button>
+
       </div>
     </div>
   )

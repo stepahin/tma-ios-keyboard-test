@@ -110,9 +110,10 @@ html, body, #root {
   border-color: rgba(46, 166, 255, 0.4);
 }
 
-.variant-button-mp4 {
-  background-color: rgba(46, 166, 255, 0.2); /* Бледно-синий */
-  border-color: rgba(46, 166, 255, 0.4);
+/* Розовый фон для карточки видео */
+.variant-button-pink {
+  background-color: rgba(255, 105, 180, 0.2); /* Бледно-розовый */
+  border-color: rgba(255, 105, 180, 0.4);
 }
 
 .variant-button:hover {
@@ -137,6 +138,10 @@ html, body, #root {
 
 .variant-button-blue:hover {
   background-color: rgba(46, 166, 255, 0.3);
+}
+
+.variant-button-pink:hover {
+  background-color: rgba(255, 105, 180, 0.3);
 }
 
 .variant-button:active {
