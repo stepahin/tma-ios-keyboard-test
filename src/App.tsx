@@ -106,6 +106,14 @@ function App() {
           iOS Keyboard 8
           <span className="variant-description">Masonic Grid<br/>Добавлен третий таб с masonic сеткой</span>
         </button>
+
+        <button 
+          className="variant-button variant-button-mp4" 
+          onClick={() => handleNavigate('/download-mp4-demo')}
+        >
+          Download MP4 File demo
+          <span className="variant-description">Should be saved to <b>Photos</b> on iOS, not <b>Files</b></span>
+        </button>
       </div>
     </div>
   )

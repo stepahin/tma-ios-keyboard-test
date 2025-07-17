@@ -38,6 +38,8 @@ declare global {
         requestFullscreen: () => void;
         // Метод для блокировки ориентации экрана (Bot API 8.0+)
         lockOrientation: () => void;
+        // Метод для скачивания файлов (Bot API 8.0+)
+        downloadFile?: (params: { url: string; file_name: string }) => void;
         // Метод для установки цвета заголовка
         setHeaderColor: (color: string) => void;
         // Добавь другие необходимые методы при необходимости
